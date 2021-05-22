@@ -8,9 +8,6 @@
       prompt: Enter port number for ssh
       private: no
 
-    - name: wport
-      prompt: Enter port number for webserver
-      private: no
 
   tasks:
     - name: "docker_repo"
@@ -44,7 +41,6 @@
         state: started
         interactive: yes
         ports:
-          - "{{ wport }}:80"
           - "{{ sport }}:22"
 
     - name: "Retrieving IP"
