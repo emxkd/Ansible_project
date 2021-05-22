@@ -24,4 +24,26 @@ Docker containers provide a custom execution environment in which the applicatio
 
 **How it works:**
 
-This project mainly focuses upon launching datanode on docker container. First we have the playbook 
+This project mainly focuses upon launching datanode on docker container. Here we have a SSH enabled CentOS image created with the help of Dockerfile. You can directly download and use this Image using the command:
+
+```
+docker pull divyakurothe/centos-ssh:v1
+```
+
+Next you have to run the docker playbook using the command:
+
+```
+ansible-playbook docker.yml
+```
+
+This playbook will prompt for container name and port for ssh and install docker and launch conatiner with the given name. It will also retrieve the IP address of the launched container and update it in inventory file of ansible.
+
+After this playbook completed we need to run datanode playbook using the command:
+
+```
+ansible-playbook datanode.yml
+```
+
+It will install JDK and Hadoop and configure HDFS in the datanode for the given namenode IP (prompted in the starting of playbook).
+
+After all these steps are done you are ready with the required setup. 
